@@ -23,5 +23,11 @@ return {
                 },
             },
         },
+        buffers = {
+            group_empty_dirs = true,
+        },
+        filesystem = {
+            group_empty_dirs = true,
+        },
     },
 }
