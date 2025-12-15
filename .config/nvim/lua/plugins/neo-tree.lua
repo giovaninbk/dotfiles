@@ -24,9 +24,15 @@ return {
             },
         },
         buffers = {
+            follow_current_file = {
+                enabled = true,
+            },
             group_empty_dirs = true,
         },
         filesystem = {
+            follow_current_file = {
+                enabled = true,
+            },
             group_empty_dirs = true,
         },
     },

@@ -42,4 +42,8 @@ vim.keymap.set('n', '<C-l>', '20zl', { desc = 'Scroll 20 characters to the right
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
-vim.keymap.set('n', '<C-n>', ':Neotree float<CR>')
+vim.keymap.set('n', '<C-n>', ':Neotree reveal=true position=float<CR>')
+
+vim.keymap.set('n', '<leader>rt', "<cmd>lua require('neotest').run.run()<cr>", { desc = 'Run test' })
+vim.keymap.set('n', '<leader>rf', "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", { desc = 'Run file' })
+vim.keymap.set('n', '<leader>rat', "<cmd>lua require('neotest').run.run({ suite = true })<cr>", { desc = 'Run all tests' })
