@@ -44,7 +44,10 @@ return {
 				},
 			})
 
-			-- vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+			local map = vim.keymap.set
+			map("n", "K", vim.lsp.buf.hover, {})
+			map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP: go to declaration" })
+			map("n", "gd", vim.lsp.buf.definition, { desc = "LSP: Go to definition" })
 			-- vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
 			-- vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
 			-- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
