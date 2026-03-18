@@ -1,7 +1,7 @@
 return {
 	{
 		"mason-org/mason.nvim",
-		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
+		lazy = false,
 		opts = {
 			PATH = "skip",
 
@@ -19,18 +19,20 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		lazy = false,
+		dependencies = { "mason-org/mason.nvim" },
 		opts = {
 			auto_install = true,
+			ensure_installed = { "ts_ls", "clojure_lsp" },
 		},
 	},
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		config = function()
-			local servers = { "html", "cssls", "clojure_lsp", "typescript_language_server" }
+			local servers = { "clojure_lsp", "ts_ls" }
 			vim.lsp.enable(servers)
 
-			vim.lsp.config("typescript_language_server", {
+			vim.lsp.config("ts_ls", {
 				filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 				cmd = { "typescript-language-server", "--stdio" }, -- Command to start the server
 				settings = {
