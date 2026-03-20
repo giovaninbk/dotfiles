@@ -10,16 +10,26 @@ return {
 		{
 			"<A-t>",
 			function()
-				local arg = vim.fn.argv(0)
-				local dir
-				if arg ~= "" and vim.fn.isdirectory(arg) == 1 then
-					dir = vim.fn.fnamemodify(arg, ":p")
-				else
-					dir = vim.fn.expand("%:p:h")
-					if dir == "" then
-						dir = vim.fn.getcwd()
-					end
-				end
+				local root = vim.fs.root(0, {
+					".git",
+					"package.json",
+					"deps.edn",
+					"project.clj",
+					"pyproject.toml",
+					"setup.py",
+					"setup.cfg",
+					"Makefile",
+					"go.work",
+					"go.mod",
+					"pom.xml",
+					"build.gradle",
+					"build.gradle.kts",
+					"settings.gradle",
+					"settings.gradle.kts",
+					"gradlew",
+					"pubspec.yaml",
+				})
+				local dir = root or vim.fn.getcwd()
 				require("toggleterm").toggle(vim.v.count1, nil, dir, "float")
 			end,
 			desc = "Toggle terminal",
