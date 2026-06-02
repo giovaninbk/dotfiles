@@ -22,14 +22,14 @@ return {
 		dependencies = { "mason-org/mason.nvim" },
 		opts = {
 			auto_install = true,
-			ensure_installed = { "ts_ls", "clojure_lsp" },
+			ensure_installed = { "ts_ls", "clojure_lsp", "jsonls" },
 		},
 	},
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		config = function()
-			local servers = { "clojure_lsp", "ts_ls" }
+			local servers = { "clojure_lsp", "ts_ls", "jsonls" }
 			vim.lsp.enable(servers)
 
 			vim.lsp.config("ts_ls", {
@@ -43,6 +43,15 @@ return {
 					-- tsserver = {
 					--     root_dir = lspconfig.util.root_finder({ "tsconfig.json", "package.json" }, { upward = true })(),
 					-- }
+				},
+			})
+
+			vim.lsp.config("jsonls", {
+				filetypes = { "json", "jsonc" },
+				settings = {
+					json = {
+						validate = { enable = true },
+					},
 				},
 			})
 
