@@ -22,15 +22,40 @@ return {
 		dependencies = { "mason-org/mason.nvim" },
 		opts = {
 			auto_install = true,
-			ensure_installed = { "ts_ls", "clojure_lsp", "jsonls" },
+			ensure_installed = { "ts_ls", "clojure_lsp", "jsonls", "lua_ls", "cssls", "html" },
+		},
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		lazy = false,
+		dependencies = { "mason-org/mason.nvim" },
+		opts = {
+			ensure_installed = { "prettierd", "stylua", "cljfmt", "clj-kondo", "jsonlint" },
+			auto_update = false,
+			run_on_start = true,
 		},
 	},
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
+		dependencies = { "b0o/SchemaStore.nvim" },
 		config = function()
-			local servers = { "clojure_lsp", "ts_ls", "jsonls" }
+			local servers = { "clojure_lsp", "ts_ls", "jsonls", "lua_ls", "cssls", "html" }
 			vim.lsp.enable(servers)
+
+			vim.lsp.config("lua_ls", {
+				settings = {
+					Lua = {
+						runtime = { version = "LuaJIT" },
+						workspace = {
+							library = vim.api.nvim_get_runtime_file("", true),
+							checkThirdParty = false,
+						},
+						diagnostics = { globals = { "vim" } },
+						telemetry = { enable = false },
+					},
+				},
+			})
 
 			vim.lsp.config("ts_ls", {
 				filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
@@ -50,6 +75,7 @@ return {
 				filetypes = { "json", "jsonc" },
 				settings = {
 					json = {
+						schemas = require("schemastore").json.schemas(),
 						validate = { enable = true },
 					},
 				},

@@ -7,6 +7,7 @@ return {
 	main = "nvim-treesitter.config",
 	opts = {
 		auto_install = true,
+		ensure_installed = { "json", "yaml" },
 		highlight = { enable = true },
 		indent = { enable = true },
 	},

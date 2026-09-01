@@ -5,8 +5,8 @@ return {
 formatters_by_ft = {
 			lua = { "stylua" },
 			clojure = { "cljfmt" },
-			-- json = { "prettier" },
-			-- jsonc = { "prettier" },
+			json = { "prettierd" },
+			jsonc = { "prettierd" },
 			-- css = { "prettier" },
 			-- html = { "prettier" },
 		},
